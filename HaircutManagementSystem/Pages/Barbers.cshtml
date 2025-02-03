@@ -1,0 +1,35 @@
+﻿@page
+@model HaircutManagementSystem.Pages.BarbersModel
+
+<h2>Barbers</h2>
+
+<form method="post">
+    <div>
+        <label for="Name">Name:</label>
+        <input type="text" id="Name" name="Name" required />
+    </div>
+    <button type="submit">Add Barber</button>
+</form>
+
+<h3>Barber List</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var barber in Model.Barbers)
+        {
+            <tr>
+                <td>@barber.Name</td>
+                <td>
+                    <form method="post" action="/Barbers/Delete?id=@barber.ID" style="display:inline;">
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

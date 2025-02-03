@@ -1,0 +1,52 @@
+﻿@page
+@model HaircutManagementSystem.Pages.CustomersModel
+@{
+    ViewData["Title"] = "Customers";
+}
+
+<h2>Customers</h2>
+
+<!-- Add Customer Form -->
+<form method="post" asp-page-handler="Create">
+    <div>
+        <label for="Name">Name:</label>
+        <input type="text" id="Name" name="Customer.Name" required />
+    </div>
+    <div>
+        <label for="Email">Email:</label>
+        <input type="email" id="Email" name="Customer.Email" required />
+    </div>
+    <div>
+        <label for="Phone">Phone:</label>
+        <input type="text" id="Phone" name="Customer.Phone" />
+    </div>
+    <button type="submit">Add Customer</button>
+</form>
+
+<h3>Customer List</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var customer in Model.Customers)
+        {
+            <tr>
+                <td>@customer.Name</td>
+                <td>@customer.Email</td>
+                <td>@customer.Phone</td>
+                <td>
+                    <a asp-page-handler="Edit" asp-route-id="@customer.ID">Edit</a>
+                    <form method="post" asp-page-handler="Delete" asp-route-id="@customer.ID" style="display:inline;">
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
